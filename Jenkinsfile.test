@@ -1,12 +1,27 @@
 pipeline {
     agent { label 'master' }
     stages {
-        stage('build') {
+        stage('test') {
             steps {
                 sh """
                 echo "mohit"
                 """
             }
+            }
+            
+            stage ("build") {		//an arbitrary stage name
+            steps {
+                build( job:'pipeline2',wait: false) //this is where we specify which job to invoke.
+            }
         }
+        
+                stage('test2') {
+            steps {
+                sh """
+                echo "mohit"
+                """
+            }
+            }
+        
     }
 }
